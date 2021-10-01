@@ -1,0 +1,8 @@
+Package: enigma2-plugin-extensions-youtube
+Version: 0.5.0
+Architecture: all
+Section: extra
+Priority: optional
+Maintainer: reichi
+Description: Youtube in a Browser
+Depends: enigma2, dreamium
