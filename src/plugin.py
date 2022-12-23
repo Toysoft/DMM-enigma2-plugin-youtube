@@ -9,5 +9,10 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return [
-		PluginDescriptor(name=_("Youtube"), description=_("Youtube"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], fnc=main),
+		PluginDescriptor(
+			name=_("Youtube"),
+			description=_("Youtube"),
+			where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU],
+			icon="youtubetv.svg",
+			fnc=main),
 		]

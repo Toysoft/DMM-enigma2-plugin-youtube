@@ -4,3 +4,5 @@ install_PYTHON = \
 	__init__.py \
 	plugin.py \
 	YoutubeBrowser.py
+
+install_DATA = youtubetv.svg

@@ -1,4 +1,4 @@
-from enigma import eConsoleAppContainer, eDBoxLCD, eRCInput, fbClass
+from enigma import eConsoleAppContainer, eDBoxLCD, eRCInput, fbClass, eSystemResourceLock
 from Components.Label import Label
 from Components.Language import language
 from Screens.Screen import Screen
@@ -21,27 +21,24 @@ class YoutubeBrowser(Screen, ServiceStopScreen):#
 		self.__container_conn = self.__container.dataAvail.connect(self.__consoleData)
 		self.stopService()
 		self._shouldRun = True
+		self._lock = None
 		self.onShown.append(self.__run)
 
 	def __run(self):
 		if not self._shouldRun:
 			return
 		self._shouldRun = False
+		self._lock = eSystemResourceLock()
 		reactor.callLater(.5, self.__doRun)
 
 	def __doRun(self):
-		eRCInput.getInstance().lock()
-		eDBoxLCD.getInstance().lock()
-		fbClass.getInstance().lock()
 		cmd = "export LANG=" + language.getLanguage() + ".UTF-8;/usr/bin/dreamium"
 		Log.w(cmd)
-		reactor.callLater(1, self.__container.execute(cmd))
+		reactor.callLater(2, self.__container.execute, cmd)
 
 	def __consoleData(self, data):
 		Log.i(data)
 
 	def __runFinished(self, retval=1):
-		eRCInput.getInstance().unlock()
-		eDBoxLCD.getInstance().unlock()
-		fbClass.getInstance().unlock()
+		self._lock = None
 		self.close()
