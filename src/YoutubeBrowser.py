@@ -1,4 +1,4 @@
-from enigma import eConsoleAppContainer, eDBoxLCD, eRCInput, fbClass, eSystemResourceLock
+from enigma import eConsoleAppContainer, eSystemResourceLock
 from Components.Label import Label
 from Components.Language import language
 from Screens.Screen import Screen
