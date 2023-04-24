@@ -29,12 +29,12 @@ class YoutubeBrowser(Screen, ServiceStopScreen):#
 			return
 		self._shouldRun = False
 		self._lock = eSystemResourceLock()
-		reactor.callLater(.5, self.__doRun)
+		reactor.callLater(0, self.__doRun)
 
 	def __doRun(self):
 		cmd = "export LANG=" + language.getLanguage() + ".UTF-8;/usr/bin/dreamium"
 		Log.w(cmd)
-		reactor.callLater(2, self.__container.execute, cmd)
+		self.__container.execute(cmd)
 
 	def __consoleData(self, data):
 		Log.i(data)
